@@ -5,11 +5,11 @@ public class Laptop extends Product {
     protected int ram;
 
     public Laptop(String name, double price, int ram) {
-
-        if (ram < 0 || Double.isNaN(ram) || Double.isInfinite(ram)|| ram > 128) {
-            throw new IllegalArgumentException("RAM cannot be negative");
-        }
         super(name, price);
+        if (ram < 0 || ram > 128) {
+            throw new IllegalArgumentException("RAM cannot be negative or exceed 128 GB");
+        }
+    
         this.ram = ram;
     }
 

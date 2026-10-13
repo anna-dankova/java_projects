@@ -4,10 +4,10 @@ public class Phone extends Product {
     protected int cameraCount;
 
     public Phone(String name, double price, int cameraCount) {
-        if (cameraCount < 0 || Double.isNaN(cameraCount) || Double.isInfinite(cameraCount)|| cameraCount > 10) {
+        super(name, price);
+        if (cameraCount < 0 || cameraCount > 10) {
             throw new IllegalArgumentException("Camera count cannot be negative");
         }
-        super(name, price);
         this.cameraCount = cameraCount;
     }
 
@@ -20,3 +20,4 @@ public class Phone extends Product {
         return super.toString() + ", | Count of cameras : " + getCameraCount();
     }
 }
+    
