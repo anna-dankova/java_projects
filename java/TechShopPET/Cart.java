@@ -20,20 +20,18 @@ public class Cart {
         return total;
     }
 
-    public String findMostExpensiveProduct() {
-        double maxPrice = 0;
-        String expensiveName = "";
+    public Product findMostExpensiveProduct() {
         if (items.isEmpty()) {
             throw new IllegalStateException("Cart is empty");
         }
-        for (Product p : items) {
-            if (p.getPrice() > maxPrice) {
-                maxPrice = p.getPrice();
-                expensiveName = p.getName();
+        Product mostExpensive = items.get(0);
+        for (int i = 1; i < items.size(); i++) {
+            Product currentProduct = items.get(i);
+            if (currentProduct.getPrice() > mostExpensive.getPrice()) {
+                mostExpensive = currentProduct;
             }
         }
-        
-        return maxPrice + ", " + expensiveName;
+        return mostExpensive;
     }
 
     public List<Headphones> getWirelessHeadphonesOnly() {
