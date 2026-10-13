@@ -27,26 +27,33 @@ public class StoreInventory {
         return false;
     }
 
-    public void printInventoryStatics() {
-
+    public int countInventoryPhone(){
         int phoneCount = 0;
-        int laptopCount = 0;
-        int headphonesCount = 0;
-
-
         for (Product p : productsByName.values()) {
             if (p instanceof Phone) {
                 phoneCount++;
-            } else if (p instanceof Laptop) {
+            }
+        }
+        return phoneCount;
+    }
+
+    public int countInventoryLaptop(){
+        int laptopCount = 0;
+        for (Product p : productsByName.values()) {
+            if (p instanceof Laptop) {
                 laptopCount++;
-            } else if (p instanceof Headphones) {
+            }
+        }
+        return laptopCount;
+    }
+    public int countInventoryHeadphones(){
+        int headphonesCount = 0;
+        for (Product p : productsByName.values()) {
+            if (p instanceof Headphones) {
                 headphonesCount++;
             }
         }
-        System.out.println("--- Inventory Statistics ---");
-        System.out.println("Phones: " + phoneCount);
-        System.out.println("Laptops: " + laptopCount);
-        System.out.println("Headphones: " + headphonesCount);
+        return headphonesCount;
     }
 
     public int getProductCount() {
