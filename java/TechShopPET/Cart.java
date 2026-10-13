@@ -36,7 +36,7 @@ public class Cart {
         return maxPrice + ", " + expensiveName;
     }
 
-    public String getWirelessHeadphonesOnly() {
+    public List<Headphones> getWirelessHeadphonesOnly() {
         List<Headphones> wirelessHeadphones = new ArrayList<>();
 
         for (Product p : items) {
@@ -46,7 +46,7 @@ public class Cart {
                 }
             }
         }
-            return wirelessHeadphones.toString();
+            return wirelessHeadphones;
     }
     
 

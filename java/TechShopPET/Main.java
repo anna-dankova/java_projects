@@ -53,7 +53,6 @@ public class Main {
 
         System.out.println("Total cart value: " + cart.calculateTotal());
         System.out.println(cart.findMostExpensiveProduct());
-        System.out.println(cart.getWirelessHeadphonesOnly());
         System.out.println(cart.getProducts());
       
     }
