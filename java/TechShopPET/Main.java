@@ -39,15 +39,15 @@ public class Main {
         inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209, false));
 
         Cart cart = new Cart();
-        Product chosenLaptop = inventory.getProduct("Lenovo IdeaPad");
+        Product chosenLaptop = inventory.getProduct(306);
         cart.addProduct(chosenLaptop);
 
-        Product chosenHeadphones = inventory.getProduct("JBL Tune 720BT");
+        Product chosenHeadphones = inventory.getProduct(204);
         cart.addProduct(chosenHeadphones);
-        chosenHeadphones = inventory.getProduct("Marshall Monitor II");
+        chosenHeadphones = inventory.getProduct(205);
         cart.addProduct(chosenHeadphones);
 
-        Product chosenPhone = inventory.getProduct("Asus ROG Phone 8");
+        Product chosenPhone = inventory.getProduct(107);
 
         cart.addProduct(chosenPhone);
 

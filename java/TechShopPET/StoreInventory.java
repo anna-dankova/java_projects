@@ -1,27 +1,33 @@
 package TechShopPet;
-
+import java.util.Map;
 import java.util.HashMap;
 
 public class StoreInventory {
-    private HashMap<String, Product> productsByName = new HashMap<>();
+    private Map<Integer, Product> productsByID = new HashMap<>();
 
-    public void addProduct(Product product) {
-        productsByName.put(product.getName(), product);
+   public boolean addProduct(Product product) {
+    if (product == null) {
+        throw new IllegalArgumentException("Product cannot be null");
+    }
+    if (productsByID.containsKey(product.getID())) {
+        return  false;
+    }
+    productsByID.put(product.getID(), product);
+    return true; 
     }
 
-    public Product getProduct(String name) {
-        return productsByName.get(name);
-
+    public Product getProduct(int id) {
+        return productsByID.get(id) ;    
     }
 
-    public boolean hasProduct(String name) {
-        return productsByName.containsKey(name);
+    public boolean hasProduct(int id) {
+        return productsByID.containsKey(id);
         
     }
 
-    public boolean removeProduct(String name) {
-        if (productsByName.containsKey(name)) {
-            productsByName.remove(name);
+    public boolean removeProduct(int id) {
+        if (productsByID.containsKey(id)) {
+            productsByID.remove(id);
             return true;
         }
         return false;
@@ -29,7 +35,7 @@ public class StoreInventory {
 
     public int countInventoryPhone(){
         int phoneCount = 0;
-        for (Product p : productsByName.values()) {
+        for (Product p : productsByID.values()) {
             if (p instanceof Phone) {
                 phoneCount++;
             }
@@ -39,7 +45,7 @@ public class StoreInventory {
 
     public int countInventoryLaptop(){
         int laptopCount = 0;
-        for (Product p : productsByName.values()) {
+        for (Product p : productsByID.values()) {
             if (p instanceof Laptop) {
                 laptopCount++;
             }
@@ -48,7 +54,7 @@ public class StoreInventory {
     }
     public int countInventoryHeadphones(){
         int headphonesCount = 0;
-        for (Product p : productsByName.values()) {
+        for (Product p : productsByID.values()) {
             if (p instanceof Headphones) {
                 headphonesCount++;
             }
@@ -57,11 +63,11 @@ public class StoreInventory {
     }
 
     public int getProductCount() {
-        return productsByName.size();
+        return productsByID.size();
     }
 
     public void printAllProducts() {
-        for (Product p : productsByName.values()) {
+        for (Product p : productsByID.values()) {
             System.out.println(p.toString());
         }
 
