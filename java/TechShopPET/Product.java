@@ -3,7 +3,7 @@ package TechShopPet;
 public class Product {
     private String name;
     private double price;
-    private int ID;
+    final private int ID;
 
     public Product(String name, double price, int ID) {
         if (name == null || name.trim().isEmpty()) {

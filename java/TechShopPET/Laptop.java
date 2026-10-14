@@ -6,7 +6,7 @@ public class Laptop extends Product {
 
     public Laptop(String name, double price,int ID, int ram) {
         super(name, price, ID);
-        if (ram < 0 || ram > 128) {
+        if (ram <= 0 || ram >= 128) {
             throw new IllegalArgumentException("RAM cannot be negative or exceed 128 GB");
         }
     

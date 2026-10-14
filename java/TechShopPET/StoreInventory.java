@@ -12,17 +12,16 @@ public class StoreInventory {
     if (productsByID.containsKey(product.getID())) {
         return  false;
     }
-    productsByID.put(product.getID(), product);
-    return true; 
+        productsByID.put(product.getID(), product);
+        return true; 
     }
 
-    public Product getProduct(int id) {
+    public Product getProductByID(int id) {
         return productsByID.get(id) ;    
     }
 
     public boolean hasProduct(int id) {
         return productsByID.containsKey(id);
-        
     }
 
     public boolean removeProduct(int id) {
