@@ -6,7 +6,7 @@ public class Phone extends Product {
     public Phone(String name, double price, int cameraCount) {
         super(name, price);
         if (cameraCount < 0 || cameraCount > 10) {
-            throw new IllegalArgumentException("Camera count cannot be negative");
+            throw new IllegalArgumentException("Camera count cannot be negative or greater than 10");
         }
         this.cameraCount = cameraCount;
     }
