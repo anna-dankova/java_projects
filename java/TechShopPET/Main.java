@@ -41,8 +41,6 @@ public class Main {
         Cart cart = new Cart();
         Product chosenProduct = inventory.getProductByID(306);
         cart.addProduct(chosenProduct);
-        Product chosenProduct2 = inventory.getProductByID(306);
-        cart.addProduct(chosenProduct2);
         
 
         System.out.println("Total cart value: " + cart.calculateTotal());

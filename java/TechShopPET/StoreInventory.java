@@ -1,6 +1,8 @@
 package TechShopPet;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 public class StoreInventory {
     private Map<Integer, Product> productsByID = new HashMap<>();
@@ -65,10 +67,9 @@ public class StoreInventory {
         return productsByID.size();
     }
 
-    public void printAllProducts() {
-        for (Product p : productsByID.values()) {
-            System.out.println(p.toString());
-        }
+    public List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<Product>(productsByID.values());
+        return allProducts;
 
     }
 }
