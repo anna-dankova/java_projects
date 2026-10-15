@@ -1,5 +1,6 @@
 package TechShopPet;
-
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,15 +38,43 @@ public class Main {
         inventory.addProduct(new Headphones("Beats Studio Pro", 350.0,208, true));
         inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209, false));
         
+        
+        List<Product> listForTesting = inventory.getAllProducts();
+
+        for(Product p : listForTesting){
+            System.out.println(p);
+        }
+        int sizeBefore = listForTesting.size();
+        System.out.println("List size before removing: " + sizeBefore);
+        listForTesting.remove(0); 
+        System.out.println("List size after removing: " + listForTesting.size());
+        int sizeOfStore = inventory.getAllProducts().size();
+        System.out.println("Size of inventory: " + sizeOfStore);
+
 
         Cart cart = new Cart();
         Product chosenProduct = inventory.getProductByID(306);
         cart.addProduct(chosenProduct);
+        Product chosenProduct2 = inventory.getProductByID(105);
+        cart.addProduct(chosenProduct2);
         
 
         System.out.println("Total cart value: " + cart.calculateTotal());
         System.out.println(cart.findMostExpensiveProduct());
         System.out.println(cart.getProducts());
-      
     }
+    public static  void phoneScanner(StoreInventory inventory){
+        Scanner myObj= new Scanner(System.in);
+        System.out.println("Put your Name for the Product");
+        String productName= myObj.nextLine();
+        System.out.println("Put in price for Product");
+        Double productPrice = myObj.nextDouble();
+        myObj.nextLine();
+        System.out.println("Put your ID for Product");
+        Integer productID = myObj.nextInt();
+        myObj.nextLine();
+        System.out.println("put your count of cameras");
+        Integer cameraCount = myObj.nextInt();
+        inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
+        }
 }

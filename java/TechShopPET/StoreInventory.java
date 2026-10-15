@@ -70,6 +70,5 @@ public class StoreInventory {
     public List<Product> getAllProducts() {
         List<Product> allProducts = new ArrayList<Product>(productsByID.values());
         return allProducts;
-
     }
 }
