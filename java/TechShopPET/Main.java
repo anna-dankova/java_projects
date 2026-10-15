@@ -39,30 +39,83 @@ public class Main {
         // inventory.addProduct(new Headphones("Sony WF-1000XM5", 250.0,207, true));
         // inventory.addProduct(new Headphones("Beats Studio Pro", 350.0,208, true));
         // inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209, false));
+
+        boolean isAdded = phoneScanner(inventory, myObj);
+        laptopScanner(inventory, myObj);
         
+        if(isAdded){
+            System.out.println("Succes : Product was added");
+        }else 
+            {System.out.println("Error : This ID is already used");}
+
         
-        phoneScanner(inventory, myObj);
         if(inventory.getAllProducts().isEmpty()){
             System.out.println("empty");
          }
         for(Product p : inventory.getAllProducts()){
             System.out.println(p);
         }
+
         System.out.println("Total cart value: " + cart.calculateTotal());
         int sizeOfStore = inventory.getAllProducts().size();
         System.out.println("Size of inventory: " + sizeOfStore);
 }
-    public static  void phoneScanner(StoreInventory inventory,Scanner myObj){
-        System.out.println("Put your Name for the Product");
+
+
+
+    public static boolean phoneScanner(StoreInventory inventory,Scanner myObj){
+        System.out.println("Name :");
         String productName= myObj.nextLine();
-        System.out.println("Put in price for Product");
+
+        System.out.println("Price :");
         Double productPrice = myObj.nextDouble();
         myObj.nextLine();
-        System.out.println("Put your ID for Product");
+
+        System.out.println("ID :");
         Integer productID = myObj.nextInt();
         myObj.nextLine();
-        System.out.println("put your count of cameras");
+
+        System.out.println("Count of cameras");
         Integer cameraCount = myObj.nextInt();
-        inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
+        myObj.nextLine();
+
+        return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
     }
+
+    public static boolean laptopScanner(StoreInventory inventory,Scanner myObj){
+        System.out.println("Name :");
+        String productName= myObj.nextLine();
+
+        System.out.println("Price :");
+        Double productPrice = myObj.nextDouble();
+        myObj.nextLine();
+
+        System.out.println("ID :");
+        Integer productID = myObj.nextInt();
+        myObj.nextLine();
+
+        System.out.println("Count of RAM");
+        Integer RAMcount = myObj.nextInt();
+        myObj.nextLine();
+
+        return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
+}
+    public static boolean headphonesScanner(StoreInventory inventory,Scanner myObj){
+        System.out.println("Name :");
+        String productName= myObj.nextLine();
+
+        System.out.println("Price :");
+        Double productPrice = myObj.nextDouble();
+        myObj.nextLine();
+
+        System.out.println("ID :");
+        Integer productID = myObj.nextInt();
+        myObj.nextLine();
+
+        System.out.println("Wireless?");
+        Boolean isWireless = myObj.nextBoolean();
+        myObj.nextLine();
+
+        return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
+}
 }
