@@ -1,11 +1,12 @@
 package TechShopPet;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         StoreInventory inventory = new StoreInventory();
-        Scanner myObj= new Scanner(System.in);
+        Scanner myObj = new Scanner(System.in);
         Cart cart = new Cart();
         // inventory.addProduct(new Phone("iPhone 15", 1000.0,101, 2));
         // inventory.addProduct(new Phone("Samsung Galaxy S24", 900.0,102, 2));
@@ -16,7 +17,7 @@ public class Main {
         // inventory.addProduct(new Phone("Asus ROG Phone 8", 1100.0,107, 2));
         // inventory.addProduct(new Phone("Huawei Pura 70", 850.0,108, 2));
         // inventory.addProduct(new Phone("Nothing Phone 2", 550.0,109, 2));
-        // inventory.addProduct(new Phone("Sony Xperia 1 VI", 1300.0,110,   2));
+        // inventory.addProduct(new Phone("Sony Xperia 1 VI", 1300.0,110, 2));
 
         // inventory.addProduct(new Laptop("Asus Vivobook 14 Flip", 1688, 300,32));
         // inventory.addProduct(new Laptop("MacBook Air M3", 1400.0,301, 16));
@@ -31,41 +32,84 @@ public class Main {
 
         // inventory.addProduct(new Headphones("Sony WH-1000", 300.0,200, true));
         // inventory.addProduct(new Headphones("Apple AirPods Max", 550.0,201, true));
-        // inventory.addProduct(new Headphones("Bose QuietComfort Ultra", 400.0,202, true));
-        // inventory.addProduct(new Headphones("Sennheiser Momentum 4", 350.0,203, true));
+        // inventory.addProduct(new Headphones("Bose QuietComfort Ultra", 400.0,202,
+        // true));
+        // inventory.addProduct(new Headphones("Sennheiser Momentum 4", 350.0,203,
+        // true));
         // inventory.addProduct(new Headphones("JBL Tune 720BT", 80.0,204, false));
         // inventory.addProduct(new Headphones("Marshall Monitor II", 300.0,205, true));
         // inventory.addProduct(new Headphones("Anker Soundcore Q45", 150.0,206, true));
         // inventory.addProduct(new Headphones("Sony WF-1000XM5", 250.0,207, true));
         // inventory.addProduct(new Headphones("Beats Studio Pro", 350.0,208, true));
-        // inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209, false));
+        // inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209,
+        // false));
 
-        boolean isAdded = phoneScanner(inventory, myObj);
-        laptopScanner(inventory, myObj);
-        
-        if(isAdded){
-            System.out.println("Succes : Product was added");
-        }else 
-            {System.out.println("Error : This ID is already used");}
+        // boolean isAdded = phoneScanner(inventory, myObj);
 
-        
-        if(inventory.getAllProducts().isEmpty()){
-            System.out.println("empty");
-         }
-        for(Product p : inventory.getAllProducts()){
-            System.out.println(p);
+        // if(isAdded){
+        // System.out.println("Succes : Product was added");
+        // }else
+        // {System.out.println("Error : This ID is already used");}
+
+        // if(inventory.getAllProducts().isEmpty()){
+        // System.out.println("empty");
+        // }
+        // for(Product p : inventory.getAllProducts()){
+        // System.out.println(p);
+        // }
+
+        boolean running = true;
+
+        while (running) {
+            System.out.println(
+                    "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n0. Exit ");
+
+            if (!myObj.hasNextInt()) {
+                System.out.println("Wrong number.");
+                myObj.nextLine();
+                continue;
+            }
+            int choise = myObj.nextInt();
+            switch (choise) {
+                case 1:
+                    phoneScanner(inventory, myObj);
+                    break;
+
+                case 2:
+                    laptopScanner(inventory, myObj);
+                    break;
+
+                case 3:
+                    headphonesScanner(inventory, myObj);
+                    break;
+
+                case 4:
+                    if (inventory.getAllProducts().isEmpty()) {
+                        System.out.println("empty");
+                    }
+                    for (Product p : inventory.getAllProducts()) {
+                        System.out.println(p);
+                    }
+                    break;
+
+                case 0:
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Wrong number. Enter number between 0 and 4.");
+                    break;
+            }
+
         }
+    }
 
-        System.out.println("Total cart value: " + cart.calculateTotal());
-        int sizeOfStore = inventory.getAllProducts().size();
-        System.out.println("Size of inventory: " + sizeOfStore);
-}
-
-
-
-    public static boolean phoneScanner(StoreInventory inventory,Scanner myObj){
+    public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
+        if (myObj.hasNextLine()) {
+            myObj.nextLine();
+        }
         System.out.println("Name :");
-        String productName= myObj.nextLine();
+        String productName = myObj.nextLine();
 
         System.out.println("Price :");
         Double productPrice = myObj.nextDouble();
@@ -82,9 +126,12 @@ public class Main {
         return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
     }
 
-    public static boolean laptopScanner(StoreInventory inventory,Scanner myObj){
+    public static boolean laptopScanner(StoreInventory inventory, Scanner myObj) {
+        if (myObj.hasNextLine()) {
+            myObj.nextLine();
+        }
         System.out.println("Name :");
-        String productName= myObj.nextLine();
+        String productName = myObj.nextLine();
 
         System.out.println("Price :");
         Double productPrice = myObj.nextDouble();
@@ -99,10 +146,14 @@ public class Main {
         myObj.nextLine();
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
-}
-    public static boolean headphonesScanner(StoreInventory inventory,Scanner myObj){
+    }
+
+    public static boolean headphonesScanner(StoreInventory inventory, Scanner myObj) {
+        if (myObj.hasNextLine()) {
+            myObj.nextLine();
+        }
         System.out.println("Name :");
-        String productName= myObj.nextLine();
+        String productName = myObj.nextLine();
 
         System.out.println("Price :");
         Double productPrice = myObj.nextDouble();
@@ -117,5 +168,5 @@ public class Main {
         myObj.nextLine();
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
-}
+    }
 }
