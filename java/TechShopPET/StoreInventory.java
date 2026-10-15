@@ -12,11 +12,12 @@ public class StoreInventory {
         throw new IllegalArgumentException("Product cannot be null");
     }
     if (productsByID.containsKey(product.getID())) {
-        return  false;
+        return false;
     }
         productsByID.put(product.getID(), product);
-        return true; 
+        return true;
     }
+
 
     public Product getProductByID(int id) {
         return productsByID.get(id) ;    
@@ -71,4 +72,6 @@ public class StoreInventory {
         List<Product> allProducts = new ArrayList<Product>(productsByID.values());
         return allProducts;
     }
+
+
 }
