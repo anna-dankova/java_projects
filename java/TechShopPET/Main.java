@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         StoreInventory inventory = new StoreInventory();
         Scanner myObj = new Scanner(System.in);
-        Cart cart = new Cart();
         // inventory.addProduct(new Phone("iPhone 15", 1000.0,101, 2));
         // inventory.addProduct(new Phone("Samsung Galaxy S24", 900.0,102, 2));
         // inventory.addProduct(new Phone("Google Pixel 8", 700.0,103, 2));
@@ -43,13 +42,6 @@ public class Main {
         // inventory.addProduct(new Headphones("Beats Studio Pro", 350.0,208, true));
         // inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209,
         // false));
-
-        // if(inventory.getAllProducts().isEmpty()){
-        // System.out.println("empty");
-        // }
-        // for(Product p : inventory.getAllProducts()){
-        // System.out.println(p);
-        // }
 
         boolean running = true;
 
@@ -114,15 +106,15 @@ public class Main {
         String productName = myObj.nextLine();
 
         System.out.println("Price :");
-        Double productPrice = myObj.nextDouble();
+        double productPrice = myObj.nextDouble();
         myObj.nextLine();
 
         System.out.println("ID :");
-        Integer productID = myObj.nextInt();
+        Int productID = myObj.nextInt();
         myObj.nextLine();
 
         System.out.println("Count of cameras");
-        Integer cameraCount = myObj.nextInt();
+        Int cameraCount = myObj.nextInt();
         myObj.nextLine();
 
         return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
@@ -133,15 +125,15 @@ public class Main {
         String productName = myObj.nextLine();
 
         System.out.println("Price :");
-        Double productPrice = myObj.nextDouble();
+        double productPrice = myObj.nextDouble();
         myObj.nextLine();
 
         System.out.println("ID :");
-        Integer productID = myObj.nextInt();
+        Int productID = myObj.nextInt();
         myObj.nextLine();
 
         System.out.println("Count of RAM");
-        Integer RAMcount = myObj.nextInt();
+        Int RAMcount = myObj.nextInt();
         myObj.nextLine();
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
@@ -152,15 +144,15 @@ public class Main {
         String productName = myObj.nextLine();
 
         System.out.println("Price :");
-        Double productPrice = myObj.nextDouble();
+        double productPrice = myObj.nextDouble();
         myObj.nextLine();
 
         System.out.println("ID :");
-        Integer productID = myObj.nextInt();
+        Int productID = myObj.nextInt();
         myObj.nextLine();
 
-        System.out.println("Wireless?");
-        Boolean isWireless = myObj.nextBoolean();
+        System.out.println("Wireless? Enter true or false: ");
+        boolean isWireless = myObj.nextBoolean();
         myObj.nextLine();
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
