@@ -105,17 +105,11 @@ public class Main {
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
-        System.out.println("Price :");
-        double productPrice = myObj.nextDouble();
-        myObj.nextLine();
+        double productPrice = doubleCheck(myObj, "Enter Price : ");
 
-        System.out.println("ID :");
-        Int productID = myObj.nextInt();
-        myObj.nextLine();
+        int productID = intCheck(myObj, "Enter ID : ");
 
-        System.out.println("Count of cameras");
-        Int cameraCount = myObj.nextInt();
-        myObj.nextLine();
+        int cameraCount = intCheck(myObj, "Enter count of cameras : ");
 
         return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
     }
@@ -124,17 +118,11 @@ public class Main {
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
-        System.out.println("Price :");
-        double productPrice = myObj.nextDouble();
-        myObj.nextLine();
+        double productPrice = doubleCheck(myObj, "Enter Price : ");
 
-        System.out.println("ID :");
-        Int productID = myObj.nextInt();
-        myObj.nextLine();
+        int productID = intCheck(myObj, "Enter ID : ");
 
-        System.out.println("Count of RAM");
-        Int RAMcount = myObj.nextInt();
-        myObj.nextLine();
+        int RAMcount = intCheck(myObj, "Enter count of RAM : ");
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
     }
@@ -143,18 +131,38 @@ public class Main {
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
-        System.out.println("Price :");
-        double productPrice = myObj.nextDouble();
-        myObj.nextLine();
+        double productPrice = doubleCheck(myObj, "Enter Price : ");
 
-        System.out.println("ID :");
-        Int productID = myObj.nextInt();
-        myObj.nextLine();
+        int productID = intCheck(myObj, "Enter ID : ");
 
         System.out.println("Wireless? Enter true or false: ");
         boolean isWireless = myObj.nextBoolean();
         myObj.nextLine();
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
+    }
+
+    public static int intCheck(Scanner myObj, String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = myObj.nextLine();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong : Enter an integer in the 'int' range");
+            }
+        }
+    }
+
+    public static double doubleCheck(Scanner myObj, String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = myObj.nextLine();
+            try {
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Price, decimal part separated by a dot");
+            }
+        }
     }
 }
