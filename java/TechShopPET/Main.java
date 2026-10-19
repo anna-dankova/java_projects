@@ -44,13 +44,6 @@ public class Main {
         // inventory.addProduct(new Headphones("Audio-Technica M50xBT2", 200.0,209,
         // false));
 
-        // boolean isAdded = phoneScanner(inventory, myObj);
-
-        // if(isAdded){
-        // System.out.println("Succes : Product was added");
-        // }else
-        // {System.out.println("Error : This ID is already used");}
-
         // if(inventory.getAllProducts().isEmpty()){
         // System.out.println("empty");
         // }
@@ -70,19 +63,23 @@ public class Main {
                 continue;
             }
             int choise = myObj.nextInt();
+            myObj.nextLine();
             switch (choise) {
-                case 1:
-                    phoneScanner(inventory, myObj);
+                case 1: {
+                    boolean isAdded = phoneScanner(inventory, myObj);
+                    showAddResult(isAdded);
                     break;
-
-                case 2:
-                    laptopScanner(inventory, myObj);
+                }
+                case 2: {
+                    boolean isAdded = laptopScanner(inventory, myObj);
+                    showAddResult(isAdded);
                     break;
-
-                case 3:
-                    headphonesScanner(inventory, myObj);
+                }
+                case 3: {
+                    boolean isAdded = headphonesScanner(inventory, myObj);
+                    showAddResult(isAdded);
                     break;
-
+                }
                 case 4:
                     if (inventory.getAllProducts().isEmpty()) {
                         System.out.println("empty");
@@ -104,10 +101,15 @@ public class Main {
         }
     }
 
-    public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
-        if (myObj.hasNextLine()) {
-            myObj.nextLine();
+    public static void showAddResult(boolean isAdded) {
+        if (isAdded) {
+            System.out.println("Succes : Product was added");
+        } else {
+            System.out.println("Error : This ID is already used");
         }
+    }
+
+    public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
@@ -127,9 +129,6 @@ public class Main {
     }
 
     public static boolean laptopScanner(StoreInventory inventory, Scanner myObj) {
-        if (myObj.hasNextLine()) {
-            myObj.nextLine();
-        }
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
@@ -149,9 +148,6 @@ public class Main {
     }
 
     public static boolean headphonesScanner(StoreInventory inventory, Scanner myObj) {
-        if (myObj.hasNextLine()) {
-            myObj.nextLine();
-        }
         System.out.println("Name :");
         String productName = myObj.nextLine();
 
