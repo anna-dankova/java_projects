@@ -167,11 +167,14 @@ public class Main {
     public static boolean booleanCheck(Scanner myObj, String prompt) {
         while (true) {
             System.out.println(prompt);
-            String input = myObj.nextLine();
-            try {
-                return Boolean.parseBoolean(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Wrong: only true or false");
+
+            if (myObj.hasNextBoolean()) {
+                boolean input = myObj.nextBoolean();
+                myObj.nextLine();
+                return input;
+            } else {
+                System.out.println("Wrong : True or False only!");
+                myObj.nextLine();
             }
         }
     }
