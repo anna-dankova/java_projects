@@ -102,59 +102,70 @@ public class Main {
     }
 
     public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name : ");
+        String productName = stringCheck(myObj, "Enter Name for phone: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price : ");
+        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID : ");
+        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        int cameraCount = intCheck(myObj, "Enter count of cameras : ");
+        int cameraCount = intCheck(myObj, "Enter count of cameras(1-10) : ", 1, 10);
 
         return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
     }
 
     public static boolean laptopScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name : ");
+        String productName = stringCheck(myObj, "Enter Name for laptop: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price : ");
+        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID : ");
+        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        int RAMcount = intCheck(myObj, "Enter count of RAM : ");
+        int RAMcount = intCheck(myObj, "Enter count of RAM (0-128): ", 0, 128);
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
     }
 
     public static boolean headphonesScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name : ");
+        String productName = stringCheck(myObj, "Enter Name for headphones: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price : ");
+        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID : ");
+        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        boolean isWireless = booleanCheck(myObj, "Enter is wireless ?");
+        boolean isWireless = booleanCheck(myObj, "Enter is wireless (true/false)");
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
     }
 
-    public static int intCheck(Scanner myObj, String prompt) {
+    public static int intCheck(Scanner myObj, String prompt, int min, int max) {
         while (true) {
             System.out.println(prompt);
-            String input = myObj.nextLine();
+            String input = myObj.nextLine().trim();
+
             try {
-                return Integer.parseInt(input);
+                int number = Integer.parseInt(input);
+                if (number >= min && number <= max) {
+                    return number;
+                } else {
+                    System.out.printf("Number has to be between from %d to %d\n", min, max);
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Wrong : Enter an integer in the 'int' range");
             }
         }
     }
 
-    public static double doubleCheck(Scanner myObj, String prompt) {
+    public static double doubleCheck(Scanner myObj, String prompt, double min, double max) {
         while (true) {
             System.out.println(prompt);
-            String input = myObj.nextLine();
+            String input = myObj.nextLine().trim();
             try {
-                return Double.parseDouble(input);
+                double price = Double.parseDouble(input);
+                if (price > 0 && price <= 10000) {
+                    return price;
+                } else {
+                    System.out.printf("Price has to be between %d and %d\n", min, max);
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Price, decimal part separated by a dot");
             }
