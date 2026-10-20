@@ -135,9 +135,7 @@ public class Main {
 
         int productID = intCheck(myObj, "Enter ID : ");
 
-        System.out.println("Wireless? Enter true or false: ");
-        boolean isWireless = myObj.nextBoolean();
-        myObj.nextLine();
+        boolean isWireless = booleanCheck(myObj, "Enter is wireless ?");
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
     }
@@ -162,6 +160,18 @@ public class Main {
                 return Double.parseDouble(input);
             } catch (NumberFormatException e) {
                 System.out.println("Price, decimal part separated by a dot");
+            }
+        }
+    }
+
+    public static boolean booleanCheck(Scanner myObj, String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = myObj.nextLine();
+            try {
+                return Boolean.parseBoolean(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong: only true or false");
             }
         }
     }
