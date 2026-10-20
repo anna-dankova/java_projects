@@ -102,8 +102,7 @@ public class Main {
     }
 
     public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
-        System.out.println("Name :");
-        String productName = myObj.nextLine();
+        String productName = stringCheck(myObj, "Enter Name : ");
 
         double productPrice = doubleCheck(myObj, "Enter Price : ");
 
@@ -115,8 +114,7 @@ public class Main {
     }
 
     public static boolean laptopScanner(StoreInventory inventory, Scanner myObj) {
-        System.out.println("Name :");
-        String productName = myObj.nextLine();
+        String productName = stringCheck(myObj, "Enter Name : ");
 
         double productPrice = doubleCheck(myObj, "Enter Price : ");
 
@@ -128,8 +126,7 @@ public class Main {
     }
 
     public static boolean headphonesScanner(StoreInventory inventory, Scanner myObj) {
-        System.out.println("Name :");
-        String productName = myObj.nextLine();
+        String productName = stringCheck(myObj, "Enter Name : ");
 
         double productPrice = doubleCheck(myObj, "Enter Price : ");
 
@@ -175,6 +172,20 @@ public class Main {
             } else {
                 System.out.println("Wrong : True or False only!");
                 myObj.nextLine();
+            }
+        }
+    }
+
+    public static String stringCheck(Scanner myObj, String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = myObj.nextLine();
+            input.trim();
+            if (input == null || input.isEmpty()) {
+                System.out.println("Wrong : name cant be null!");
+                myObj.nextLine();
+            } else {
+                return input;
             }
         }
     }
