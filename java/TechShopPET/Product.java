@@ -34,11 +34,16 @@ public class Product {
 
     public void applyDiscount(double percentage) {
 
-        if (percentage < 0 || percentage > 100 || Double.isNaN(percentage) || Double.isInfinite(percentage)) {
-            throw new IllegalArgumentException("Discount percentage must be between 0 and 100");
+        if (percentage < 1 || percentage > 99 || Double.isNaN(percentage) || Double.isInfinite(percentage)) {
+            throw new IllegalArgumentException("Discount percentage must be between 1 and 99");
         }
         double discountAmount = price * percentage / 100;
-        price -= discountAmount;
+        double newPrice = price - discountAmount;
+
+        if (newPrice <= 0) {
+            throw new IllegalAccessException("The resulting price cannot be zero or negative");
+        }
+        price = newPrice;
     }
 
     @Override

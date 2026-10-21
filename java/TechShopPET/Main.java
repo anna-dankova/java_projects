@@ -18,17 +18,17 @@ public class Main {
             myObj.nextLine();
             switch (choise) {
                 case 1: {
-                    boolean isAdded = phoneScanner(inventory, myObj);
+                    boolean isAdded = addPhoneFromConsole(inventory, myObj);
                     showAddResult(isAdded);
                     break;
                 }
                 case 2: {
-                    boolean isAdded = laptopScanner(inventory, myObj);
+                    boolean isAdded = addLaptopFromConsole(inventory, myObj);
                     showAddResult(isAdded);
                     break;
                 }
                 case 3: {
-                    boolean isAdded = headphonesScanner(inventory, myObj);
+                    boolean isAdded = addHeadphonesFromConsole(inventory, myObj);
                     showAddResult(isAdded);
                     break;
                 }
@@ -65,43 +65,43 @@ public class Main {
         }
     }
 
-    public static boolean phoneScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name for phone: ");
+    public static boolean addPhoneFromConsole(StoreInventory inventory, Scanner myObj) {
+        String productName = readString(myObj, "Enter Name for phone: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
+        double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        int cameraCount = intCheck(myObj, "Enter count of cameras(1-10) : ", 1, 10);
+        int cameraCount = readInt(myObj, "Enter count of cameras(1-10) : ", 1, 10);
 
         return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
     }
 
-    public static boolean laptopScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name for laptop: ");
+    public static boolean addLaptopFromConsole(StoreInventory inventory, Scanner myObj) {
+        String productName = readString(myObj, "Enter Name for laptop: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
+        double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        int RAMcount = intCheck(myObj, "Enter count of RAM (0-128): ", 0, 128);
+        int RAMcount = readInt(myObj, "Enter count of RAM (0-128): ", 0, 128);
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
     }
 
-    public static boolean headphonesScanner(StoreInventory inventory, Scanner myObj) {
-        String productName = stringCheck(myObj, "Enter Name for headphones: ");
+    public static boolean addHeadphonesFromConsole(StoreInventory inventory, Scanner myObj) {
+        String productName = readString(myObj, "Enter Name for headphones: ");
 
-        double productPrice = doubleCheck(myObj, "Enter Price (1-10000): ", 1, 10000);
+        double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = intCheck(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        boolean isWireless = booleanCheck(myObj, "Enter is wireless (true/false)");
+        boolean isWireless = readBoolean(myObj, "Enter is wireless (true/false)");
 
         return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
     }
 
-    public static int intCheck(Scanner myObj, String prompt, int min, int max) {
+    public static int readInt(Scanner myObj, String prompt, int min, int max) {
         while (true) {
             System.out.println(prompt);
             String input = myObj.nextLine().strip();
@@ -119,7 +119,7 @@ public class Main {
         }
     }
 
-    public static double doubleCheck(Scanner myObj, String prompt, double min, double max) {
+    public static double readDouble(Scanner myObj, String prompt, double min, double max) {
         while (true) {
             System.out.println(prompt);
             String input = myObj.nextLine().strip();
@@ -136,7 +136,7 @@ public class Main {
         }
     }
 
-    public static boolean booleanCheck(Scanner myObj, String prompt) {
+    public static boolean readBoolean(Scanner myObj, String prompt) {
         while (true) {
             System.out.println(prompt);
 
@@ -151,7 +151,7 @@ public class Main {
         }
     }
 
-    public static String stringCheck(Scanner myObj, String prompt) {
+    public static String readString(Scanner myObj, String prompt) {
         while (true) {
             System.out.println(prompt);
             String input = myObj.nextLine();
