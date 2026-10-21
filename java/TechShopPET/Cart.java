@@ -22,7 +22,7 @@ public class Cart {
     }
 
     public Product findMostExpensiveProduct() {
-        if (items.isBlank()) {
+        if (items.isEmpty()) {
             throw new IllegalStateException("Cart is empty");
         }
         Product mostExpensive = items.get(0);

@@ -1,4 +1,4 @@
-package JavaProg2;
+package exercise.BEST;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Exercise_15 {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
-        Map<String, Integer> inputs = new HashMap<>(); 
+        Map<String, Integer> inputs = new HashMap<>();
 
         while (true) {
             System.out.println("Введите имя (или 'stop' для выхода): ");
             String name = myObj.nextLine();
-            
+
             if (name.equalsIgnoreCase("stop")) {
                 break;
             }
@@ -22,34 +22,33 @@ public class Exercise_15 {
 
             while (!validAge) {
                 System.out.println("Введите возраст : ");
-                try { 
+                try {
                     if (!myObj.hasNextInt()) {
                         System.out.println("Ошибка: Введите число!");
-                        myObj.nextLine(); 
-                        continue; 
+                        myObj.nextLine();
+                        continue;
                     }
 
                     age = myObj.nextInt();
-                    myObj.nextLine(); 
+                    myObj.nextLine();
 
-                    if (age < 0) { 
+                    if (age < 0) {
                         throw new IllegalArgumentException("Возраст не может быть отрицательным");
                     }
-                    validAge = true; 
+                    validAge = true;
 
                 } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage()); 
+                    System.out.println(e.getMessage());
                 }
             }
 
-    
             inputs.put(name, age);
             System.out.println("Успешно добавлено: " + name + " — " + age);
             System.out.println("Текущая база данных: " + inputs);
             System.out.println("-----------------------------------");
         }
-        
+
         System.out.println("Программа завершена. Итоговый результат: " + inputs);
-        myObj.close(); 
+        myObj.close();
     }
 }

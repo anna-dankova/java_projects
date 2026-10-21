@@ -1,4 +1,4 @@
-package Lessons1.Analitics;
+package exercise.BEST.Text_analitics;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class AdvancedTextAnalyzer extends TextMetrics {
         System.out.println("\n--- ТОП " + topN + " САМЫХ ЧАСТЫХ СЛОВ ---");
 
         list.sort((w1, w2) -> Integer.compare(w2.getCount(), w1.getCount()));
-        int limit = Math.min(topN, list.size());
+        // int limit = Math.min(topN, list.size());
         for (int i = 0; i < topN; i++) {
             WordFrequency wf = list.get(i);
             System.out.println((i + 1) + ". " + wf.getWord() + " ->" + wf.getCount() + "раз(а)");

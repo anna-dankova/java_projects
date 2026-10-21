@@ -1,4 +1,4 @@
-package Izpiti;
+package exercise.Izpiti;
 
 import java.util.ArrayList;
 
@@ -87,7 +87,7 @@ public class izpit1_20junij2022 {
     }
     // naloga 5
 
-    public class Pesem {
+    public static class Pesem {
         String songName;
         String autorName;
         int minuts;
@@ -117,7 +117,7 @@ public class izpit1_20junij2022 {
         }
     }
 
-    public class Zgoscenka {
+    public static class Zgoscenka {
         private ArrayList<Pesem> seznamPesmi;
 
         public Zgoscenka(ArrayList<Pesem> seznamPesmi) {
@@ -133,10 +133,10 @@ public class izpit1_20junij2022 {
             return seznamPesmi.size();
         }
 
-        public int izpisi(int minutes) {
+        public void izpisi(int minutes) {
             for (Pesem p : seznamPesmi) {
                 if (minutes > p.minuts) {
-                    seznamPesmi.get(i).toString();
+                    System.out.println(p);
                 }
             }
         }

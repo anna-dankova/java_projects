@@ -1,4 +1,4 @@
-package Lessons1.Analitics;
+package exercise.BEST.Text_analitics;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

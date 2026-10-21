@@ -1,22 +1,24 @@
-package Lessons1.Analitics;
+package exercise.BEST.Text_analitics;
 
 public class WordFrequency {
     private String word;
     private int count;
 
-    public WordFrequency(String word, int count){
-        this.word=word;
-        this.count=count;
+    public WordFrequency(String word, int count) {
+        this.word = word;
+        this.count = count;
     }
 
-    public String getWord(){
+    public String getWord() {
         return this.word;
-}
-    public void incrementCount(){
+    }
+
+    public void incrementCount() {
         this.count++;
-}
-    public int getCount(){
+    }
+
+    public int getCount() {
         return this.count;
-}
-    
+    }
+
 }

@@ -1,4 +1,4 @@
-package Izpiti;
+package exercise.Izpiti;
 
 import java.util.ArrayList;
 

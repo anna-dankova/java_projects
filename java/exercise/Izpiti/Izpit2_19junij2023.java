@@ -1,9 +1,7 @@
-package Izpiti;
+package exercise.Izpiti;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import Lessons1.library.book;
 
 public class Izpit2_19junij2023 {
 
@@ -75,7 +73,7 @@ public class Izpit2_19junij2023 {
     // }
 
     // naloga 4
-    public class Predstava {
+    public static class Predstava {
         String imePredstave;
         int dozinaMinut;
         int stNastopajocih;
@@ -111,7 +109,7 @@ public class Izpit2_19junij2023 {
         }
     }
 
-    public class Gledalisce {
+    public static class Gledalisce {
         private ArrayList<Predstava> seznam;
 
         public Gledalisce(ArrayList<Predstava> seznam) {
@@ -153,8 +151,7 @@ public class Izpit2_19junij2023 {
         gledalisce.izpisi(10);
     }
 
-
-    //naloga 5
+    // naloga 5
 
     public static int neVsebuje(int[] tabela) {
         Arrays.sort(tabela);
@@ -170,5 +167,4 @@ public class Izpit2_19junij2023 {
         int vsota = neVsebuje ? st : 0;
         return vsota + preveri(tabela, st + 1);
     }
-    }
-
+}

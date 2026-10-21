@@ -41,7 +41,7 @@ public class Product {
         double newPrice = price - discountAmount;
 
         if (newPrice <= 0) {
-            throw new IllegalAccessException("The resulting price cannot be zero or negative");
+            throw new IllegalArgumentException("The resulting price cannot be zero or negative");
         }
         price = newPrice;
     }

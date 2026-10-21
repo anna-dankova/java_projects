@@ -1,4 +1,4 @@
-package Lessons1;
+package exercise.vaje;
 
 import java.util.ArrayList;
 import java.util.Scanner;

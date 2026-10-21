@@ -1,18 +1,17 @@
 
+package exercise.BEST;
+
 // 1. Консольный калькулятор фигур
 // Сделай программу, которая считает площадь и периметр для круга, прямоугольника и треугольника.
 // Сейчас: Shape, Circle, Rectangle, Triangle, общий метод area() и perimeter().
 // Потом: добавь ввод с клавиатуры и меню через switch.
-
-package Lessons1;
-
 import java.util.Scanner;
 
 public class kalkulator {
     public static void main(String[] args) {
-        while (true) {
+        try (Scanner myObj = new Scanner(System.in)) {
+            while (true) {
             System.out.println("1. Circle " + "\n" + "2. Rectangle " + "\n" + "3.Triangle");
-            Scanner myObj = new Scanner(System.in);
             int choise = myObj.nextInt();
 
             switch (choise) {
@@ -50,6 +49,7 @@ public class kalkulator {
                 default:
                     System.out.println("Введено не то число:");
                     break;
+            }
             }
         }
     }
