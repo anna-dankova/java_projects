@@ -1,4 +1,4 @@
-package Vaje;
+package exercise.vaje.Vaje;
 
 public class Vaja10 {
     public static void main(String[] args) {
@@ -6,8 +6,8 @@ public class Vaja10 {
         String carModel = " Q3";
         int carPrice = 15_000_000;
         boolean hasCarAutomaticTransmission = true;
-        System.out.printf("Я менеждер салонв %s, машина %s, стоит %d .Коробка передач автоматическая %b%n" , carMark, carModel, carPrice, hasCarAutomaticTransmission);
+        System.out.printf("Я менеждер салонв %s, машина %s, стоит %d .Коробка передач автоматическая %b%n", carMark,
+                carModel, carPrice, hasCarAutomaticTransmission);
 
     }
 }
-
