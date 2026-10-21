@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         StoreInventory inventory = new StoreInventory();
+
         Scanner myObj = new Scanner(System.in);
 
         boolean running = true;
@@ -13,12 +14,6 @@ public class Main {
         while (running) {
             System.out.println(
                     "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n0. Exit ");
-
-            // if (!myObj.hasNextInt()) {
-            // System.out.println("Wrong number.");
-            // myObj.nextLine();
-            // continue;
-            // }
             int choise = myObj.nextInt();
             myObj.nextLine();
             switch (choise) {
@@ -38,12 +33,16 @@ public class Main {
                     break;
                 }
                 case 4:
-                    if (inventory.getAllProducts().isEmpty()) {
-                        System.out.println("empty");
+                    List<Product> products = inventory.getAllProducts();
+
+                    if (products.isEmpty()) {
+                        System.out.println("Catalog is empty");
+                    } else {
+                        for (Product p : products) {
+                            System.out.println(p);
+                        }
                     }
-                    for (Product p : inventory.getAllProducts()) {
-                        System.out.println(p);
-                    }
+
                     break;
 
                 case 0:
@@ -105,7 +104,7 @@ public class Main {
     public static int intCheck(Scanner myObj, String prompt, int min, int max) {
         while (true) {
             System.out.println(prompt);
-            String input = myObj.nextLine().trim();
+            String input = myObj.nextLine().strip();
 
             try {
                 int number = Integer.parseInt(input);
@@ -123,7 +122,7 @@ public class Main {
     public static double doubleCheck(Scanner myObj, String prompt, double min, double max) {
         while (true) {
             System.out.println(prompt);
-            String input = myObj.nextLine().trim();
+            String input = myObj.nextLine().strip();
             try {
                 double price = Double.parseDouble(input);
                 if (price > 0 && price <= 10000) {
@@ -157,7 +156,7 @@ public class Main {
             System.out.println(prompt);
             String input = myObj.nextLine();
             input.trim();
-            if (input == null || input.isEmpty()) {
+            if (input == null || input.isBlank()) {
                 System.out.println("Wrong : name cant be null!");
                 myObj.nextLine();
             } else {

@@ -1,4 +1,5 @@
 package TechShopPet;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class Cart {
     }
 
     public double calculateTotal() {
-         double total = 0;
+        double total = 0;
         for (Product p : items) {
             total += p.getPrice();
         }
@@ -21,7 +22,7 @@ public class Cart {
     }
 
     public Product findMostExpensiveProduct() {
-        if (items.isEmpty()) {
+        if (items.isBlank()) {
             throw new IllegalStateException("Cart is empty");
         }
         Product mostExpensive = items.get(0);
@@ -44,22 +45,11 @@ public class Cart {
                 }
             }
         }
-            return wirelessHeadphones;
+        return wirelessHeadphones;
     }
-    
 
-
-     public List<Product> getProducts(){
+    public List<Product> getProducts() {
         return new ArrayList<>(this.items);
-     }
-    //  public void printProducts() {
-    //     StringBuilder sb = new StringBuilder("Products in the list:\n");
-    //     for (Product p : items) {
-    //         sb.append(p).append("\n");
-    // }
-    //     System.out.println(sb.toString());
-    // }
+    }
+
 }
-
-
-

@@ -6,10 +6,10 @@ public class Product {
     final private int ID;
 
     public Product(String name, double price, int ID) {
-        if (name == null || name.trim().isEmpty()) {
+        if (name == null || name.strip().isBlank()) {
             throw new IllegalArgumentException("Product name cannot be null or empty");
         }
-        if (price <=0 || Double.isNaN(price) || Double.isInfinite(price)) {
+        if (price <= 0 || Double.isNaN(price) || Double.isInfinite(price)) {
             throw new IllegalArgumentException("Product price must be a positive number");
         }
         if (ID <= 0) {
@@ -34,7 +34,7 @@ public class Product {
 
     public void applyDiscount(double percentage) {
 
-        if (percentage < 0 || percentage > 100|| Double.isNaN(percentage) || Double.isInfinite(percentage)) {
+        if (percentage < 0 || percentage > 100 || Double.isNaN(percentage) || Double.isInfinite(percentage)) {
             throw new IllegalArgumentException("Discount percentage must be between 0 and 100");
         }
         double discountAmount = price * percentage / 100;
