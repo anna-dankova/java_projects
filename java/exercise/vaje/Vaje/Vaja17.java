@@ -1,4 +1,4 @@
-package Vaje;
+package exercise.vaje.Vaje;
 
 public class Vaja17 {
     public static void main(String[] args) {
