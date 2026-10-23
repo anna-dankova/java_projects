@@ -1,11 +1,12 @@
 package TechShopPet;
 
 public class Product {
+    private String type;
     private String name;
     private double price;
     final private int ID;
 
-    public Product(String name, double price, int ID) {
+    public Product(String name, String type, double price, int ID) {
         if (name == null || name.strip().isBlank()) {
             throw new IllegalArgumentException("Product name cannot be null or empty");
         }
@@ -16,6 +17,7 @@ public class Product {
             throw new IllegalArgumentException("Product ID must be a positive integer");
         }
         this.name = name;
+        this.type = type;
         this.price = price;
         this.ID = ID;
     }
