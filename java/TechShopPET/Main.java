@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         StoreInventory inventory = new StoreInventory();
+        InventoryJsonStorage storage = new InventoryJsonStorage();
 
         Scanner myObj = new Scanner(System.in);
 
@@ -17,7 +18,7 @@ public class Main {
 
         while (running) {
             System.out.println(
-                    "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n0. Exit ");
+                    "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n0. Exit ");
             int choise = myObj.nextInt();
             myObj.nextLine();
             switch (choise) {
@@ -36,7 +37,7 @@ public class Main {
                     showAddResult(isAdded);
                     break;
                 }
-                case 4:
+                case 4: {
                     List<Product> products = inventory.getAllProducts();
 
                     if (products.isEmpty()) {
@@ -46,15 +47,19 @@ public class Main {
                             System.out.println(p);
                         }
                     }
-
                     break;
-
+                }
+                case 5: {
+                    String filePath = "jsonInventory.json";
+                    storage.saveJson(inventory, filePath);
+                    break;
+                }
                 case 0:
                     running = false;
                     break;
 
                 default:
-                    System.out.println("Wrong number. Enter number between 0 and 4.");
+                    System.out.println("Wrong number. Enter number between 0 and 5.");
                     break;
             }
 

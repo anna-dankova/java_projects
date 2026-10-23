@@ -1,0 +1,20 @@
+[
+  {
+    "ram": 8,
+    "name": "Acer Swift Go",
+    "price": 800.0,
+    "ID": 305
+  },
+  {
+    "ram": 32,
+    "name": "Lenovo Legion 5",
+    "price": 1300.0,
+    "ID": 306
+  },
+  {
+    "isWireless": true,
+    "name": "Sony WF-1000XM5",
+    "price": 250.99,
+    "ID": 207
+  }
+]
