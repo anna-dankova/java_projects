@@ -19,8 +19,7 @@ public class Main {
         while (running) {
             System.out.println(
                     "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n0. Exit ");
-            int choise = myObj.nextInt();
-            myObj.nextLine();
+            int choise = readInt(myObj, "Enter your choise ", 0, 5);
             switch (choise) {
                 case 1: {
                     boolean isAdded = addPhoneFromConsole(inventory, myObj);
@@ -93,7 +92,7 @@ public class Main {
 
         int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
 
-        int RAMcount = readInt(myObj, "Enter count of RAM (0-128): ", 0, 128);
+        int RAMcount = readInt(myObj, "Enter count of RAM (0-128): ", 1, 128);
 
         return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
     }
@@ -134,10 +133,10 @@ public class Main {
             String input = myObj.nextLine().strip();
             try {
                 double price = Double.parseDouble(input);
-                if (price > 0 && price <= 10000) {
+                if (price > min && price <= max) {
                     return price;
                 } else {
-                    System.out.printf("Price has to be between %d and %d\n", min, max);
+                    System.out.printf("Price has to be between %.2f and %.2f\n", min, max);
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Price, decimal part separated by a dot");
@@ -148,14 +147,14 @@ public class Main {
     public static boolean readBoolean(Scanner myObj, String prompt) {
         while (true) {
             System.out.println(prompt);
+            String input = myObj.nextLine().strip();
 
-            if (myObj.hasNextBoolean()) {
-                boolean input = myObj.nextBoolean();
-                myObj.nextLine();
-                return input;
+            if (input.equalsIgnoreCase("true")) {
+                return true;
+            } else if (input.equalsIgnoreCase("false")) {
+                return false;
             } else {
                 System.out.println("Wrong : True or False only!");
-                myObj.nextLine();
             }
         }
     }
@@ -164,10 +163,9 @@ public class Main {
         while (true) {
             System.out.println(prompt);
             String input = myObj.nextLine();
-            input.trim();
+            input = input.strip();
             if (input == null || input.isBlank()) {
                 System.out.println("Wrong : name cant be null!");
-                myObj.nextLine();
             } else {
                 return input;
             }
