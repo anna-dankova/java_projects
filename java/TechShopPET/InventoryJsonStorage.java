@@ -50,6 +50,7 @@ public class InventoryJsonStorage {
     }
 
     private Product productFromJson(JsonObject jsonObject) {
+        Product product = null;
         if (!jsonObject.has("id") || !jsonObject.has("type")) {
             throw new IllegalArgumentException("Something wrong with your file");
         }
@@ -64,7 +65,8 @@ public class InventoryJsonStorage {
                 if (jsonObject.has("ram") && jsonObject.get("ram").isJsonPrimitive()) {
                     ram = jsonObject.get("ram").getAsInt();
                 }
-                return new Laptop(name, price, id, ram);
+                product = new Laptop(name, price, id, ram);
+                break;
             }
 
             case "phone": {
@@ -72,20 +74,25 @@ public class InventoryJsonStorage {
                 if (jsonObject.has("countCameras") && jsonObject.get("countCameras").isJsonPrimitive()) {
                     countCamers = jsonObject.get("countCameras").getAsInt();
                 }
-                return new Laptop(name, price, id, countCamers);
-                return new Phone(name, price, id, countCamers);
+                product = new Laptop(name, price, id, countCamers);
+                break;
             }
-
             case "headphones": {
                 boolean isWireless = false;
                 if (jsonObject.has("isWireless") && jsonObject.get("isWireless").isJsonPrimitive()) {
                     isWireless = jsonObject.get("isWireless").getAsBoolean();
                 }
-                return new Headphones(name, price, id, isWireless);
+                product = new Headphones(name, price, id, isWireless);
+                break;
             }
             default:
                 System.out.println("Unknown type :" + type);
                 return null;
         }
+        return product;
+    }
+
+    public StoreInventory loadJson(String filePath) {
+        StoreInventory inventory = new StoreInventory();
     }
 }

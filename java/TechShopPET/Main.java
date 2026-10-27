@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        StoreInventory inventory = new StoreInventory();
         InventoryJsonStorage storage = new InventoryJsonStorage();
+        StoreInventory inventory = storage.loadJson("jsonInventory.json");
 
         Scanner myObj = new Scanner(System.in);
 
@@ -45,7 +45,7 @@ public class Main {
                     break;
                 }
                 case 5: {
-                    String filePath = "jsonInventory.json";
+                    final String filePath = "jsonInventory.json";
                     storage.saveJson(inventory, filePath);
                     break;
                 }
