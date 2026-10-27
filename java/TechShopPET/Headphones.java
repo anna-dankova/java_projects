@@ -3,8 +3,8 @@ package TechShopPet;
 public class Headphones extends Product {
     protected boolean isWireless;
 
-    public Headphones(String name, double price, int ID, boolean isWireless) {
-        super(name, "Headphones", price, ID);
+    public Headphones(String name, double price, int id, boolean isWireless) {
+        super(name, "Headphones", price, id);
         this.isWireless = isWireless;
     }
 

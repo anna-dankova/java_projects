@@ -4,22 +4,22 @@ public class Product {
     private String type;
     private String name;
     private double price;
-    final private int ID;
+    final private int id;
 
-    public Product(String name, String type, double price, int ID) {
+    public Product(String name, String type, double price, int id) {
         if (name == null || name.strip().isBlank()) {
             throw new IllegalArgumentException("Product name cannot be null or empty");
         }
         if (price <= 0 || Double.isNaN(price) || Double.isInfinite(price)) {
             throw new IllegalArgumentException("Product price must be a positive number");
         }
-        if (ID <= 0) {
+        if (id <= 0) {
             throw new IllegalArgumentException("Product ID must be a positive integer");
         }
         this.name = name;
         this.type = type;
         this.price = price;
-        this.ID = ID;
+        this.id = id;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class Product {
         return this.price;
     }
 
-    public int getID() {
-        return this.ID;
+    public int getId() {
+        return this.id;
     }
 
     public String getType() {
@@ -54,6 +54,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product : " + getName() + ", | Price : " + getPrice() + ", | ID : " + getID();
+        return "Product : " + getName() + ", | Price : " + getPrice() + ", | Id : " + getId();
     }
 }

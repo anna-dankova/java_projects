@@ -6,30 +6,30 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class StoreInventory {
-    private Map<Integer, Product> productsByID = new HashMap<>();
+    private Map<Integer, Product> productsById = new HashMap<>();
 
     public boolean addProduct(Product product) {
         if (product == null) {
             throw new IllegalArgumentException("Product cannot be null");
         }
-        if (productsByID.containsKey(product.getID())) {
+        if (productsById.containsKey(product.getId())) {
             return false;
         }
-        productsByID.put(product.getID(), product);
+        productsById.put(product.getId(), product);
         return true;
     }
 
-    public Product getProductByID(int id) {
-        return productsByID.get(id);
+    public Product getProductById(int id) {
+        return productsById.get(id);
     }
 
     public boolean hasProduct(int id) {
-        return productsByID.containsKey(id);
+        return productsById.containsKey(id);
     }
 
     public boolean removeProduct(int id) {
-        if (productsByID.containsKey(id)) {
-            productsByID.remove(id);
+        if (productsById.containsKey(id)) {
+            productsById.remove(id);
             return true;
         }
         return false;
@@ -37,7 +37,7 @@ public class StoreInventory {
 
     public int countInventoryPhone() {
         int phoneCount = 0;
-        for (Product p : productsByID.values()) {
+        for (Product p : productsById.values()) {
             if (p instanceof Phone) {
                 phoneCount++;
             }
@@ -47,7 +47,7 @@ public class StoreInventory {
 
     public int countInventoryLaptop() {
         int laptopCount = 0;
-        for (Product p : productsByID.values()) {
+        for (Product p : productsById.values()) {
             if (p instanceof Laptop) {
                 laptopCount++;
             }
@@ -57,7 +57,7 @@ public class StoreInventory {
 
     public int countInventoryHeadphones() {
         int headphonesCount = 0;
-        for (Product p : productsByID.values()) {
+        for (Product p : productsById.values()) {
             if (p instanceof Headphones) {
                 headphonesCount++;
             }
@@ -66,11 +66,11 @@ public class StoreInventory {
     }
 
     public int getProductCount() {
-        return productsByID.size();
+        return productsById.size();
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(productsByID.values());
+        return new ArrayList<>(productsById.values());
     }
 
 }

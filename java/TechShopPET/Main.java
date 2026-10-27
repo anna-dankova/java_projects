@@ -1,9 +1,5 @@
 package TechShopPet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,11 +74,11 @@ public class Main {
 
         double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productId = readInt(myObj, "Enter Id (100-1000): ", 100, 1000);
 
         int cameraCount = readInt(myObj, "Enter count of cameras(1-10) : ", 1, 10);
 
-        return inventory.addProduct(new Phone(productName, productPrice, productID, cameraCount));
+        return inventory.addProduct(new Phone(productName, productPrice, productId, cameraCount));
     }
 
     public static boolean addLaptopFromConsole(StoreInventory inventory, Scanner myObj) {
@@ -90,11 +86,11 @@ public class Main {
 
         double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productId = readInt(myObj, "Enter Id (100-1000): ", 100, 1000);
 
         int RAMcount = readInt(myObj, "Enter count of RAM (0-128): ", 1, 128);
 
-        return inventory.addProduct(new Laptop(productName, productPrice, productID, RAMcount));
+        return inventory.addProduct(new Laptop(productName, productPrice, productId, RAMcount));
     }
 
     public static boolean addHeadphonesFromConsole(StoreInventory inventory, Scanner myObj) {
@@ -102,11 +98,11 @@ public class Main {
 
         double productPrice = readDouble(myObj, "Enter Price (1-10000): ", 1, 10000);
 
-        int productID = readInt(myObj, "Enter ID (100-1000): ", 100, 1000);
+        int productId = readInt(myObj, "Enter Id (100-1000): ", 100, 1000);
 
         boolean isWireless = readBoolean(myObj, "Enter is wireless (true/false)");
 
-        return inventory.addProduct(new Headphones(productName, productPrice, productID, isWireless));
+        return inventory.addProduct(new Headphones(productName, productPrice, productId, isWireless));
     }
 
     public static int readInt(Scanner myObj, String prompt, int min, int max) {
