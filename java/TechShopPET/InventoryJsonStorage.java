@@ -2,6 +2,8 @@ package TechShopPet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,6 +12,14 @@ public class InventoryJsonStorage {
 
     public String toJson(StoreInventory inventory) {
         return gson.toJson(inventory.getAllProducts());
+    }
+
+    private JsonObject productToJson(Product product) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", product.getID());
+        jsonObject.addProperty("type", product.getType());
+        jsonObject.addProperty("name", product.getName());
+        return jsonObject;
     }
 
     public void saveJson(StoreInventory inventory, String filePath) {

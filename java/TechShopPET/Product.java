@@ -34,6 +34,10 @@ public class Product {
         return this.ID;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void applyDiscount(double percentage) {
 
         if (percentage < 1 || percentage > 99 || Double.isNaN(percentage) || Double.isInfinite(percentage)) {
