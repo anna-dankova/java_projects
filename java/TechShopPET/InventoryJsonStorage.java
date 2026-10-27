@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,6 +46,46 @@ public class InventoryJsonStorage {
             writer.write(json);
         } catch (IOException e) {
             System.out.println("Cant save this file" + e.getMessage());
+        }
+    }
+
+    private Product productFromJson(JsonObject jsonObject) {
+        if (!jsonObject.has("id") || !jsonObject.has("type")) {
+            throw new IllegalArgumentException("Something wrong with your file");
+        }
+        int id = jsonObject.get("id").getAsInt();
+        String type = jsonObject.get("type").getAsString();
+        String name = jsonObject.get("name").getAsString();
+        double price = jsonObject.get("price").getAsDouble();
+
+        switch (type.toLowerCase()) {
+            case "laptop": {
+                int ram = 0;
+                if (jsonObject.has("ram") && jsonObject.get("ram").isJsonPrimitive()) {
+                    ram = jsonObject.get("ram").getAsInt();
+                }
+                return new Laptop(name, price, id, ram);
+            }
+
+            case "phone": {
+                int countCamers = 0;
+                if (jsonObject.has("countCameras") && jsonObject.get("countCameras").isJsonPrimitive()) {
+                    countCamers = jsonObject.get("countCameras").getAsInt();
+                }
+                return new Laptop(name, price, id, countCamers);
+                return new Phone(name, price, id, countCamers);
+            }
+
+            case "headphones": {
+                boolean isWireless = false;
+                if (jsonObject.has("isWireless") && jsonObject.get("isWireless").isJsonPrimitive()) {
+                    isWireless = jsonObject.get("isWireless").getAsBoolean();
+                }
+                return new Headphones(name, price, id, isWireless);
+            }
+            default:
+                System.out.println("Unknown type :" + type);
+                return null;
         }
     }
 }
