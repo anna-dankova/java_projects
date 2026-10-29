@@ -160,7 +160,7 @@ public class Main {
             System.out.println(prompt);
             String input = myObj.nextLine();
             input = input.strip();
-            if (input == null || input.isBlank()) {
+            if (input.isBlank()) {
                 System.out.println("Wrong : name cant be null!");
             } else {
                 return input;

@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -56,7 +55,7 @@ public class InventoryJsonStorage {
      *
      * @param inventory The StoreInventory object to be saved
      * @param filePath The name of the file where inventory will be saved
-     * @throws IOException If an error occurs during file writing
+
      */
     public void saveJson(StoreInventory inventory, String filePath) {
         String json = toJson(inventory);
@@ -116,12 +115,26 @@ public class InventoryJsonStorage {
     }
 
     public StoreInventory loadJson(String filePath) {
-        if(filePath.isEmpty()) {
+        if(filePath == null) {
             throw new IllegalArgumentException("File path is empty");
-
         }
         try (FileReader reader = new FileReader(filePath)) {
             JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);
+            if(jsonElement == null || !jsonElement.isJsonArray()) { // Its Array
+                throw new IllegalArgumentException("File is not a json array");
+            }
+            StoreInventory temporaryStore = new StoreInventory();
+            JsonArray jsonArray = jsonElement.getAsJsonArray();  // мы сделали из этой штуки gson, читаемый список
+            for(JsonElement element : jsonArray) { // get JsonElement
+                element.isJsonObject();// products
+                if(! temporaryStore.addProduct(productFromJson(element.getAsJsonObject()))){ // проверка на одинаковый id в addProduct --> t/f
+                    throw new IllegalArgumentException("Duplicate product id " + element.getAsJsonObject().get("id"));
+                }}
+            return temporaryStore;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-    }
+
+
+}
 }
