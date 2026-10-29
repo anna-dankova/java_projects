@@ -15,8 +15,8 @@ public class Main {
         while (running) {
             System.out.println(
                     "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n0. Exit ");
-            int choise = readInt(myObj, "Enter your choise ", 0, 5);
-            switch (choise) {
+            int choice = readInt(myObj, "Enter your choice ", 0, 5);
+            switch (choice) {
                 case 1: {
                     boolean isAdded = addPhoneFromConsole(inventory, myObj);
                     showAddResult(isAdded);
@@ -63,7 +63,7 @@ public class Main {
 
     public static void showAddResult(boolean isAdded) {
         if (isAdded) {
-            System.out.println("Succes : Product was added");
+            System.out.println("Success : Product was added");
         } else {
             System.out.println("Error : This ID is already used");
         }

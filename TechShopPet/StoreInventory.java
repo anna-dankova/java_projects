@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class StoreInventory {
-    private Map<Integer, Product> productsById = new HashMap<>();
+    private final Map<Integer, Product> productsById = new HashMap<>();
 
     public boolean addProduct(Product product) {
         if (product == null) {

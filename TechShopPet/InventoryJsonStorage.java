@@ -6,12 +6,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class InventoryJsonStorage {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
-
+    /**
+     * Converts a StoreInventory object into JSON format.
+     *
+     * @param inventory The StoreInventory object containing all products to be serialized
+     * @return A JSON string representation of the entire inventory as a JSON array
+     */
     public String toJson(StoreInventory inventory) {
         JsonArray jsonArray = new JsonArray();
         for (Product product : inventory.getAllProducts()) {
@@ -20,7 +26,13 @@ public class InventoryJsonStorage {
         }
         return gson.toJson(jsonArray);
     }
-
+    /**
+     * Converts the entire store inventory into a single JSON formatted string.
+     * It loops through all products and builds a JSON array.
+     *
+     * @param product The inventory object containing the list of products.
+     * @return A formatted JSON string ready to be saved.
+     */
     private JsonObject productToJson(Product product) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("id", product.getId());
@@ -39,7 +51,13 @@ public class InventoryJsonStorage {
         }
         return jsonObject;
     }
-
+    /**
+     * Saves the current inventory to a JSON file.
+     *
+     * @param inventory The StoreInventory object to be saved
+     * @param filePath The name of the file where inventory will be saved
+     * @throws IOException If an error occurs during file writing
+     */
     public void saveJson(StoreInventory inventory, String filePath) {
         String json = toJson(inventory);
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -48,7 +66,12 @@ public class InventoryJsonStorage {
             System.out.println("Cant save this file" + e.getMessage());
         }
     }
-
+    /**
+     * Converts a JSON element into a Product object.
+     *
+     * @param jsonObject The JSON object containing product data
+     * @return A Product object populated with data from the JSON element
+     */
     private Product productFromJson(JsonObject jsonObject) {
         Product product = null;
         if (!jsonObject.has("id") || !jsonObject.has("type")) {
@@ -70,11 +93,11 @@ public class InventoryJsonStorage {
             }
 
             case "phone": {
-                int countCamers = 0;
-                if (jsonObject.has("countCameras") && jsonObject.get("countCameras").isJsonPrimitive()) {
-                    countCamers = jsonObject.get("countCameras").getAsInt();
+                int cameraCount = 0;
+                if (jsonObject.has("cameraCount") && jsonObject.get("cameraCount").isJsonPrimitive()) {
+                    cameraCount = jsonObject.get("cameraCount").getAsInt();
                 }
-                product = new Laptop(name, price, id, countCamers);
+                product = new Phone(name, price, id, cameraCount);
                 break;
             }
             case "headphones": {
@@ -93,6 +116,12 @@ public class InventoryJsonStorage {
     }
 
     public StoreInventory loadJson(String filePath) {
-        StoreInventory inventory = new StoreInventory();
+        if(filePath.isEmpty()) {
+            throw new IllegalArgumentException("File path is empty");
+
+        }
+        try (FileReader reader = new FileReader(filePath)) {
+            JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);
+        }
     }
 }

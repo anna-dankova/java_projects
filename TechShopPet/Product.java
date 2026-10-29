@@ -1,8 +1,8 @@
 package TechShopPet;
 
 public class Product {
-    private String type;
-    private String name;
+    private final String type;
+    private final String name;
     private double price;
     final private int id;
 
