@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class InventoryJsonStorage {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
@@ -57,13 +58,14 @@ public class InventoryJsonStorage {
      * @param filePath The name of the file where inventory will be saved
 
      */
-    public void saveJson(StoreInventory inventory, String filePath) {
+    public void saveJson(StoreInventory inventory, String filePath)throws IOException {
         String json = toJson(inventory);
-        try (FileWriter writer = new FileWriter(filePath)) {
+        String fileName = filePath + ".json";
+        try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
             writer.write(json);
-        } catch (IOException e) {
-            System.out.println("Cant save this file" + e.getMessage());
         }
+
+
     }
     /**
      * Converts a JSON element into a Product object.

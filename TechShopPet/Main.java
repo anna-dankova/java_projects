@@ -1,12 +1,20 @@
 package TechShopPet;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final String filePath ="jsonInventory.json";
         InventoryJsonStorage storage = new InventoryJsonStorage();
-        StoreInventory inventory = storage.loadJson("jsonInventory.json");
+        StoreInventory inventory ;
+        try {
+            inventory = storage.loadJson(filePath);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
 
         Scanner myObj = new Scanner(System.in);
 
@@ -45,8 +53,11 @@ public class Main {
                     break;
                 }
                 case 5: {
-                    final String filePath = "jsonInventory.json";
-                    storage.saveJson(inventory, filePath);
+                    try{
+                        storage.saveJson(inventory,filePath);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 }
                 case 0:
