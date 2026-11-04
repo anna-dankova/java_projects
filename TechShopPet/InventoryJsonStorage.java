@@ -40,14 +40,11 @@ public class InventoryJsonStorage {
         jsonObject.addProperty("name", product.getName());
         jsonObject.addProperty("price", product.getPrice());
 
-        if (product instanceof Laptop) {
-            jsonObject.addProperty("ram", ((Laptop) product).getRam());
-        } else if (product instanceof Phone) {
-            jsonObject.addProperty("cameraCount", ((Phone) product).getCameraCount());
-        } else if (product instanceof Headphones) {
-            jsonObject.addProperty("isWireless", ((Headphones) product).isWireless());
-        } else {
-            System.out.println("This product type is not supported");
+        switch (product) {
+            case Laptop laptop -> jsonObject.addProperty("ram", laptop.getRam());
+            case Phone phone -> jsonObject.addProperty("cameraCount", phone.getCameraCount());
+            case Headphones headphones -> jsonObject.addProperty("isWireless", headphones.isWireless());
+            default -> throw  new IllegalArgumentException("Unknown product type");
         }
         return jsonObject;
     }
@@ -75,7 +72,8 @@ public class InventoryJsonStorage {
      */
     private Product productFromJson(JsonObject jsonObject) {
         Product product = null;
-        if (!jsonObject.has("id") || !jsonObject.has("type")) {
+        if (!jsonObject.has("id") || !jsonObject.has("type")
+                ||!jsonObject.has("name")||!jsonObject.has("price")) {
             throw new IllegalArgumentException("Something wrong with your file");
         }
         int id = jsonObject.get("id").getAsInt();
@@ -128,10 +126,11 @@ public class InventoryJsonStorage {
             StoreInventory temporaryStore = new StoreInventory();
             JsonArray jsonArray = jsonElement.getAsJsonArray();  // мы сделали из этой штуки gson, читаемый список
             for(JsonElement element : jsonArray) { // get JsonElement
-                element.isJsonObject();// products
-                if(! temporaryStore.addProduct(productFromJson(element.getAsJsonObject()))){ // проверка на одинаковый id в addProduct --> t/f
-                    throw new IllegalArgumentException("Duplicate product id " + element.getAsJsonObject().get("id"));
-                }}
+                if(element.isJsonObject()){// products
+                    if(! temporaryStore.addProduct(productFromJson(element.getAsJsonObject()))){ // проверка на одинаковый id в addProduct --> t/f
+                        throw new IllegalArgumentException("Duplicate product id " + element.getAsJsonObject().get("id"));
+                    }}
+            }
             return temporaryStore;
         } catch (IOException e) {
             throw new RuntimeException(e);
