@@ -75,7 +75,7 @@ public class InventoryJsonStorage {
     private Product productFromJson(JsonObject jsonObject) {
         Product product = null;
         if (!jsonObject.has("id") || !jsonObject.has("type")) {
-            throw new IllegalArgumentException("Something wrong with your file");
+            throw new IllegalArgumentException("InventoryJsonStorage.productFromJson: no id or type specified");
         }
         int id = jsonObject.get("id").getAsInt();
         String type = jsonObject.get("type").getAsString();
@@ -118,8 +118,7 @@ public class InventoryJsonStorage {
     public StoreInventory loadJson(String filePath) {
         Path path = Paths.get(filePath);
         if(!Files.exists(path)) {
-             StoreInventory inventory = new StoreInventory();
-             return inventory;
+             return new StoreInventory();
         }
         try (FileReader reader = new FileReader(filePath)) {
             JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);

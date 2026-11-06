@@ -12,20 +12,17 @@ public class Main {
         try {
             inventory = storage.loadJson(filePath);
         } catch (Exception e) {
-            System.out.println("Something went wrong with your file  " + e.getMessage());
-
+            System.out.println("Cant load filePath " + e.getMessage());
             return;
         }
-
-
             Scanner myObj = new Scanner(System.in);
 
             boolean running = true;
 
             while (running) {
                 System.out.println(
-                        "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n6. Product by ID\n0. Exit ");
-                int choice = readInt(myObj, "Enter your choice ", 0, 6);
+                        "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Delete product\n6. Product by ID\n7. Save Catalog\n0. Exit ");
+                int choice = readInt(myObj, "Enter your choice ", 0, 7);
                 switch (choice) {
                     case 1: {
                         boolean isAdded = addPhoneFromConsole(inventory, myObj);
@@ -55,6 +52,14 @@ public class Main {
                         break;
                     }
                     case 5: {
+                        removeProductFromConsole(myObj, inventory);
+                        break;
+                    }
+                    case 6: {
+                        findProductFromConsole(myObj, inventory);
+                        break;
+                    }
+                    case 7:{
                         try {
                             storage.saveJson(inventory, filePath);
                             System.out.println("Save successful");
@@ -62,10 +67,6 @@ public class Main {
                             System.out.println("Save failed");
                             System.out.println(e.getMessage());
                         }
-                        break;
-                    }
-                    case 6: {
-                        findProductFromConsole(myObj, inventory, "Enter Id :");
                         break;
                     }
                     case 0:
@@ -186,13 +187,22 @@ public class Main {
             }
         }
     }
-    public static void findProductFromConsole(Scanner myObj, StoreInventory inventory,String prompt) {
-        int input = readInt(myObj,"Enter Id : ",100, 1000 );
+    public static void findProductFromConsole(Scanner myObj, StoreInventory inventory) {
+        int input = readInt(myObj,"Enter ID: ", 100, 1000);
         Product product = inventory.getProductById(input);
         if(product != null){
             System.out.println(product);
         }else {
             System.out.println("Product not found");
         }
+    }
+    public static void removeProductFromConsole(Scanner myObj, StoreInventory inventory) {
+        int input = readInt(myObj,"Enter Id : ",100, 1000);
+        if(inventory.removeProduct(input)){
+            System.out.println("Product removed");
+        }else  {
+            System.out.println("Product not found");
+        }
+
     }
 }
