@@ -7,8 +7,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final String filePath = "jsonInventory.json";
+
         InventoryJsonStorage storage = new InventoryJsonStorage();
         StoreInventory inventory = null;
+        Cart cart =new Cart();
+
         try {
             inventory = storage.loadJson(filePath);
         } catch (Exception e) {
@@ -20,9 +23,32 @@ public class Main {
             boolean running = true;
 
             while (running) {
-                System.out.println(
-                        "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Delete product\n6. Product by ID\n7. Save Catalog\n0. Exit ");
-                int choice = readInt(myObj, "Enter your choice ", 0, 7);
+
+                System.out.println("""
+                        ============================
+                                 -- MENU: --
+                        ============================
+                         1. Add new phone
+                         2. Add new laptop
+                         3. Add new headphones
+                         4. Catalog
+                         5. Delete product
+                         6. Product by ID
+                         7. Save Catalog
+                        ----------------------------
+                                  -- CART:--
+                        ----------------------------
+                         8. Add product
+                         9.
+                         10.
+                         11.
+                         12.
+                         13.
+                        ----------------------------
+                         0. Exit
+                        ============================\s""");
+
+                int choice = readInt(myObj, "Choose an option", 0, 13);
                 switch (choice) {
                     case 1: {
                         boolean isAdded = addPhoneFromConsole(inventory, myObj);
@@ -67,6 +93,14 @@ public class Main {
                             System.out.println("Save failed");
                             System.out.println(e.getMessage());
                         }
+                        break;
+                    }
+                    case 8: {
+                        addToCartFromConsole(myObj, inventory, cart);
+                        break;
+                    }
+                    case 9: {
+
                         break;
                     }
                     case 0:
@@ -203,6 +237,16 @@ public class Main {
         }else  {
             System.out.println("Product not found");
         }
-
+    }
+    public  static void addToCartFromConsole(Scanner myObj, StoreInventory inventory, Cart cart) {
+        int input = readInt(myObj,"Enter Id : ",100, 1000);
+        Product product = inventory.getProductById(input);
+        if(product==null){
+            System.out.println("Product not found");
+            return;
+        }else{
+            cart.addProduct(product);
+            System.out.println("Product added");
+        }
     }
 }
