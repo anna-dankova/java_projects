@@ -44,7 +44,7 @@ public class InventoryJsonStorage {
             case Laptop laptop -> jsonObject.addProperty("ram", laptop.getRam());
             case Phone phone -> jsonObject.addProperty("cameraCount", phone.getCameraCount());
             case Headphones headphones -> jsonObject.addProperty("isWireless", headphones.isWireless());
-            default -> throw  new IllegalArgumentException("Unknown product type");
+            default -> throw new IllegalArgumentException("Unknown product type");
         }
         return jsonObject;
     }
@@ -60,9 +60,9 @@ public class InventoryJsonStorage {
         String fileName = filePath + ".json";
         try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
             writer.write(json);
+        } catch (IOException e) {
+            System.out.println("Error writing file: " + filePath);
         }
-
-
     }
     /**
      * Converts a JSON element into a Product object.
@@ -72,8 +72,7 @@ public class InventoryJsonStorage {
      */
     private Product productFromJson(JsonObject jsonObject) {
         Product product = null;
-        if (!jsonObject.has("id") || !jsonObject.has("type")
-                ||!jsonObject.has("name")||!jsonObject.has("price")) {
+        if (!jsonObject.has("id") || !jsonObject.has("type")||!jsonObject.isJsonNull()) {
             throw new IllegalArgumentException("Something wrong with your file");
         }
         int id = jsonObject.get("id").getAsInt();

@@ -6,72 +6,80 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final String filePath ="jsonInventory.json";
+        final String filePath = "jsonInventory.json";
         InventoryJsonStorage storage = new InventoryJsonStorage();
-        StoreInventory inventory ;
+        StoreInventory inventory = null;
         try {
             inventory = storage.loadJson(filePath);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Something went wrong with your file  " + e.getMessage());
 
+            return;
         }
 
-        Scanner myObj = new Scanner(System.in);
 
-        boolean running = true;
+            Scanner myObj = new Scanner(System.in);
 
-        while (running) {
-            System.out.println(
-                    "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n0. Exit ");
-            int choice = readInt(myObj, "Enter your choice ", 0, 5);
-            switch (choice) {
-                case 1: {
-                    boolean isAdded = addPhoneFromConsole(inventory, myObj);
-                    showAddResult(isAdded);
-                    break;
-                }
-                case 2: {
-                    boolean isAdded = addLaptopFromConsole(inventory, myObj);
-                    showAddResult(isAdded);
-                    break;
-                }
-                case 3: {
-                    boolean isAdded = addHeadphonesFromConsole(inventory, myObj);
-                    showAddResult(isAdded);
-                    break;
-                }
-                case 4: {
-                    List<Product> products = inventory.getAllProducts();
+            boolean running = true;
 
-                    if (products.isEmpty()) {
-                        System.out.println("Catalog is empty");
-                    } else {
-                        for (Product p : products) {
-                            System.out.println(p);
+            while (running) {
+                System.out.println(
+                        "\n --Menu:--\n1. Add new phone\n2. Add new laptop\n3. Add new headphones\n4. Catalog\n5. Save Catalog\n6. Product by ID\n0. Exit ");
+                int choice = readInt(myObj, "Enter your choice ", 0, 6);
+                switch (choice) {
+                    case 1: {
+                        boolean isAdded = addPhoneFromConsole(inventory, myObj);
+                        showAddResult(isAdded);
+                        break;
+                    }
+                    case 2: {
+                        boolean isAdded = addLaptopFromConsole(inventory, myObj);
+                        showAddResult(isAdded);
+                        break;
+                    }
+                    case 3: {
+                        boolean isAdded = addHeadphonesFromConsole(inventory, myObj);
+                        showAddResult(isAdded);
+                        break;
+                    }
+                    case 4: {
+                        List<Product> products = inventory.getAllProducts();
+
+                        if (products.isEmpty()) {
+                            System.out.println("Catalog is empty");
+                        } else {
+                            for (Product p : products) {
+                                System.out.println(p);
+                            }
                         }
+                        break;
                     }
-                    break;
-                }
-                case 5: {
-                    try{
-                        storage.saveJson(inventory,filePath);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    case 5: {
+                        try {
+                            storage.saveJson(inventory, filePath);
+                            System.out.println("Save successful");
+                        } catch (IOException e) {
+                            System.out.println("Save failed");
+                            System.out.println(e.getMessage());
+                        }
+                        break;
                     }
-                    break;
-                }
-                case 0:
-                    running = false;
-                    break;
+                    case 6: {
+                        findProductFromConsole(myObj, inventory, "Enter Id :");
+                        break;
+                    }
+                    case 0:
+                        running = false;
+                        break;
 
-                default:
-                    System.out.println("Wrong number. Enter number between 0 and 5.");
-                    break;
+                    default:
+                        System.out.println("Wrong number. Enter number between 0 and 5.");
+                        break;
+                }
+
             }
 
-        }
     }
-
     public static void showAddResult(boolean isAdded) {
         if (isAdded) {
             System.out.println("Success : Product was added");
@@ -99,9 +107,9 @@ public class Main {
 
         int productId = readInt(myObj, "Enter Id (100-1000): ", 100, 1000);
 
-        int RAMcount = readInt(myObj, "Enter count of RAM (0-128): ", 1, 128);
+        int RAMCount = readInt(myObj, "Enter count of RAM (0-128): ", 1, 128);
 
-        return inventory.addProduct(new Laptop(productName, productPrice, productId, RAMcount));
+        return inventory.addProduct(new Laptop(productName, productPrice, productId, RAMCount));
     }
 
     public static boolean addHeadphonesFromConsole(StoreInventory inventory, Scanner myObj) {
@@ -176,6 +184,15 @@ public class Main {
             } else {
                 return input;
             }
+        }
+    }
+    public static void findProductFromConsole(Scanner myObj, StoreInventory inventory,String prompt) {
+        int input = readInt(myObj,"Enter Id : ",100, 1000 );
+        Product product = inventory.getProductById(input);
+        if(product != null){
+            System.out.println(product);
+        }else {
+            System.out.println("Product not found");
         }
     }
 }
