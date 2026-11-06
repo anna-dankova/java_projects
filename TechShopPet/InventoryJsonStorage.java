@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class InventoryJsonStorage {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
@@ -57,7 +60,6 @@ public class InventoryJsonStorage {
      */
     public void saveJson(StoreInventory inventory, String filePath)throws IOException {
         String json = toJson(inventory);
-        String fileName = filePath + ".json";
         try (FileWriter writer = new FileWriter(filePath, StandardCharsets.UTF_8)) {
             writer.write(json);
         } catch (IOException e) {
@@ -72,7 +74,7 @@ public class InventoryJsonStorage {
      */
     private Product productFromJson(JsonObject jsonObject) {
         Product product = null;
-        if (!jsonObject.has("id") || !jsonObject.has("type")||!jsonObject.isJsonNull()) {
+        if (!jsonObject.has("id") || !jsonObject.has("type")) {
             throw new IllegalArgumentException("Something wrong with your file");
         }
         int id = jsonObject.get("id").getAsInt();
@@ -114,8 +116,10 @@ public class InventoryJsonStorage {
     }
 
     public StoreInventory loadJson(String filePath) {
-        if(filePath == null) {
-            throw new IllegalArgumentException("File path is empty");
+        Path path = Paths.get(filePath);
+        if(!Files.exists(path)) {
+             StoreInventory inventory = new StoreInventory();
+             return inventory;
         }
         try (FileReader reader = new FileReader(filePath)) {
             JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);
